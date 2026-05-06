@@ -6,6 +6,21 @@ import java.util.List;
 
 public class Calc {
     public static int run(String s) {
+        // 괄호 연산 처리
+        while (s.contains("(")) {
+            int start = s.lastIndexOf("(");
+            int end = s.indexOf(')', start);
+
+            String str = s.substring(start + 1, end);
+
+            int value = calculate(str);
+
+            s = s.substring(0, start) + value + s.substring(end + 1);
+        }
+        return calculate(s);
+    }
+
+    private static int calculate(String s) {
         List<String> list = new ArrayList<>(Arrays.asList(s.split(" ")));
 
         // 곱셈/나눗셈 계산 먼저
@@ -47,3 +62,4 @@ public class Calc {
         return result;
     }
 }
+
